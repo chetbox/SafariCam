@@ -2,4 +2,11 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:buster-build
 
 RUN install_packages libraspberrypi-bin
 
+# Install https://motion-project.github.io/
+RUN \
+  install_packages libavcodec58 libavdevice58 libavformat58 libavutil56 libmicrohttpd12 libswscale5 && \
+  curl -L -o /tmp/pi_buster_motion_4.3.1-1_armhf.deb https://github.com/Motion-Project/motion/releases/download/release-4.3.1/pi_buster_motion_4.3.1-1_armhf.deb && \
+  apt install /tmp/pi_buster_motion_4.3.1-1_armhf.deb && \
+  rm /tmp/pi_buster_motion_4.3.1-1_armhf.deb
+
 CMD balena-idle
