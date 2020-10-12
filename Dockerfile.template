@@ -9,4 +9,10 @@ RUN \
   apt install /tmp/pi_buster_motion_4.3.1-1_armhf.deb && \
   rm /tmp/pi_buster_motion_4.3.1-1_armhf.deb
 
-CMD balena-idle
+WORKDIR /safaricam
+
+EXPOSE 8080/tcp
+EXPOSE 8081/udp
+EXPOSE 8081/udp
+
+CMD motion
