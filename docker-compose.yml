@@ -1,0 +1,16 @@
+version: "2"
+volumes:
+  media:
+services:
+  motion:
+    build: ./motion
+    devices:
+      - /dev/video0:/dev/video0
+    volumes:
+      - media:/safaricam/media
+    working_dir: /safaricam/media
+    ports:
+      - "80:8080"
+      - "8081:8081/tcp"
+      - "8081:8081/udp"
+    restart: unless-stopped

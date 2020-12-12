@@ -10,10 +10,10 @@ RUN curl -L -o /tmp/pi_buster_motion_${MOTION_VERSION}-1_armhf.deb "${MOTION_DEB
   apt install /tmp/pi_buster_motion_${MOTION_VERSION}-1_armhf.deb && \
   rm /tmp/pi_buster_motion_${MOTION_VERSION}-1_armhf.deb
 
-WORKDIR /safaricam
+COPY motion.conf /etc/motion/motion.conf
 
-EXPOSE 8080/tcp
-EXPOSE 8081/udp
+EXPOSE 8080
+EXPOSE 8081/tcp
 EXPOSE 8081/udp
 
-CMD motion
+CMD motion -c /etc/motion/motion.conf
