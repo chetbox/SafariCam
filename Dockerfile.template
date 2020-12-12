@@ -3,11 +3,12 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:buster-build
 RUN install_packages libraspberrypi-bin
 
 # Install https://motion-project.github.io/
-RUN \
-  install_packages libavcodec58 libavdevice58 libavformat58 libavutil56 libmicrohttpd12 libswscale5 && \
-  curl -L -o /tmp/pi_buster_motion_4.3.1-1_armhf.deb https://github.com/Motion-Project/motion/releases/download/release-4.3.1/pi_buster_motion_4.3.1-1_armhf.deb && \
-  apt install /tmp/pi_buster_motion_4.3.1-1_armhf.deb && \
-  rm /tmp/pi_buster_motion_4.3.1-1_armhf.deb
+RUN install_packages libavcodec58 libavdevice58 libavformat58 libavutil56 libmicrohttpd12 libswscale5
+ENV MOTION_VERSION=4.3.2
+ENV MOTION_DEB_URL=https://github.com/Motion-Project/motion/releases/download/release-${MOTION_VERSION}/pi_buster_motion_${MOTION_VERSION}-1_armhf.deb
+RUN curl -L -o /tmp/pi_buster_motion_${MOTION_VERSION}-1_armhf.deb "${MOTION_DEB_URL}" && \
+  apt install /tmp/pi_buster_motion_${MOTION_VERSION}-1_armhf.deb && \
+  rm /tmp/pi_buster_motion_${MOTION_VERSION}-1_armhf.deb
 
 WORKDIR /safaricam
 
