@@ -5,6 +5,6 @@ RUN apk add --no-cache git inotify-tools \
 COPY user/.gphotos-uploader-cli /root/.gphotos-uploader-cli
 CMD ["/bin/sh", "-c", \
   "while true ; do \
-    inotifywait -e close_write -e move /safaricam/media/Safaricam ; \
     gphotos-uploader-cli push ; \
+    inotifywait -e close_write -e move /safaricam/media/Safaricam ; \
   done"]
