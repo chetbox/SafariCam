@@ -1,0 +1,21 @@
+
+{
+  SecretsBackendType: file,
+  APIAppCredentials: {
+    ClientID:     "456942566080-cucghjnqer6mfkql5opelhm5k53qifqc.apps.googleusercontent.com",
+    ClientSecret: "Fz0hP4yKUtV-SomG_E7qCKPv",
+  }
+  jobs: [
+    {
+      account: chetbox@gmail.com
+      sourceFolder: /safaricam/media
+      makeAlbums: {
+        enabled: true
+        use: folderName
+      }
+      deleteAfterUpload: true
+      includePatterns: []
+  	  excludePatterns: []
+    }
+  ]
+}
