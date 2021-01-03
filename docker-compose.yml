@@ -8,7 +8,7 @@ services:
       - /dev/video0:/dev/video0
     volumes:
       - media:/safaricam/media
-    working_dir: /safaricam/media
+    working_dir: /safaricam/media/${ALBUM_NAME}
     ports:
       - "80:8080"
       - "8081:8081/tcp"
@@ -17,7 +17,7 @@ services:
   gphotos:
     build: ./gphotos
     volumes:
-      - media:/safaricam/media/Safaricam
+      - media:/safaricam/media
     environment:
       - GPHOTOS_CLI_TOKENSTORE_KEY
     restart: unless-stopped

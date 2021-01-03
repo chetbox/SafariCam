@@ -6,5 +6,5 @@ COPY user/.gphotos-uploader-cli /root/.gphotos-uploader-cli
 CMD ["/bin/sh", "-c", \
   "while true ; do \
     gphotos-uploader-cli push ; \
-    inotifywait -e close_write -e move /safaricam/media/Safaricam ; \
+    inotifywait -e close_write -e move /safaricam/media/* ; \
   done"]
