@@ -2,12 +2,12 @@
 {
   SecretsBackendType: file,
   APIAppCredentials: {
-    ClientID:     "456942566080-cucghjnqer6mfkql5opelhm5k53qifqc.apps.googleusercontent.com",
-    ClientSecret: "Fz0hP4yKUtV-SomG_E7qCKPv",
+    ClientID:     "178734903006-so148t09g82ora2bepkg1innjpvsr1nm.apps.googleusercontent.com",
+    ClientSecret: "wvqFmcIn8hflZ2HRCJvAHHUr",
   }
   jobs: [
     {
-      account: chetbox@gmail.com
+      account: safaricam49@gmail.com
       sourceFolder: /safaricam/media
       makeAlbums: {
         enabled: true
