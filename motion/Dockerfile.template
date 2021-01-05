@@ -1,4 +1,4 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:buster-build
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:bullseye-build
 
 RUN install_packages libraspberrypi-bin
 
