@@ -2,13 +2,30 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:bullseye-build
 
 RUN install_packages libraspberrypi-bin
 
-# Install https://motion-project.github.io/
+# Install FFmpeg
 RUN install_packages libavcodec58 libavdevice58 libavformat58 libavutil56 libmicrohttpd12 libswscale5
-ENV MOTION_VERSION=4.3.2
-ENV MOTION_DEB_URL=https://github.com/Motion-Project/motion/releases/download/release-${MOTION_VERSION}/pi_buster_motion_${MOTION_VERSION}-1_armhf.deb
-RUN curl -L -o /tmp/pi_buster_motion_${MOTION_VERSION}-1_armhf.deb "${MOTION_DEB_URL}" && \
-  apt install /tmp/pi_buster_motion_${MOTION_VERSION}-1_armhf.deb && \
-  rm /tmp/pi_buster_motion_${MOTION_VERSION}-1_armhf.deb
+
+# Install https://motion-project.github.io/ from source
+
+# Build dependencies
+RUN install_packages autoconf automake autopoint pkgconf libtool libjpeg9-dev build-essential libzip-dev gettext libmicrohttpd-dev
+
+# FFmpeg build dependencies
+RUN install_packages libavformat-dev libavcodec-dev libavutil-dev libswscale-dev libavdevice-dev
+
+# Required to make .deb
+RUN install_packages pkg-config libjpeg-dev libpq-dev libsqlite3-dev debhelper dh-autoreconf libwebp-dev libmariadbclient-dev lsb-release
+
+RUN git clone https://github.com/Motion-Project/motion.git \
+  && ( \
+    cd motion \
+    && git checkout dd4b7a16d069a26fe706c68332be6ae7c52bfbb2 \
+    && autoreconf -fiv \
+    && ./configure \
+    && make \
+    && make install \
+  ) \
+  && rm -rf motion
 
 COPY motion.conf /etc/motion/motion.conf
 
