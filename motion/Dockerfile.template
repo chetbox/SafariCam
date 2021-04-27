@@ -2,15 +2,67 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:bullseye-build
 
 RUN install_packages libraspberrypi-bin
 
+# Compile FFmpeg with h264_omx support for Raspberry Pi
+
+RUN install_packages \
+  autoconf \
+  automake \
+  build-essential \
+  cmake \
+  git-core \
+  libass-dev \
+  libfreetype6-dev \
+  libgnutls28-dev \
+  libomxil-bellagio-dev \
+  libraspberrypi-dev \
+  libsdl2-dev \
+  libtool \
+  libunistring-dev \
+  libva-dev \
+  libvdpau-dev \
+  libvorbis-dev \
+  libx264-dev \
+  libxcb1-dev \
+  libxcb-shm0-dev \
+  libxcb-xfixes0-dev \
+  pkg-config \
+  texinfo \
+  wget \
+  yasm \
+  zlib1g-dev
+
+RUN mkdir -p ~/ffmpeg_sources && \
+  cd ~/ffmpeg_sources && \
+  wget -q -O ffmpeg.tar.bz2 https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.bz2 && \
+  tar xjf ffmpeg.tar.bz2 && \
+  cd ffmpeg-4.3.1 && \
+  PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
+    --prefix="$HOME/ffmpeg_build" \
+    --pkg-config-flags="--static" \
+    --extra-cflags="-I$HOME/ffmpeg_build/include" \
+    --extra-ldflags="-L$HOME/ffmpeg_build/lib" \
+    --extra-libs="-lpthread -lm" \
+    --enable-gpl \
+    --enable-gnutls \
+    --enable-libass \
+    --enable-libfreetype \
+    --enable-mmal \
+    --enable-omx \
+    --enable-omx-rpi \
+    --enable-libx264 || cat ffbuild/config.log && \
+  make && \
+  make install && \
+  hash -r
+
 # Install FFmpeg
-RUN install_packages libavcodec58 libavdevice58 libavformat58 libavutil56 libmicrohttpd12 libswscale5
+# RUN install_packages libavcodec58 libavdevice58 libavformat58 libavutil56 libmicrohttpd12 libswscale5
 
 # Install https://motion-project.github.io/ from source
 
 # Build dependencies
 RUN install_packages autoconf automake autopoint pkgconf libtool libjpeg9-dev build-essential libzip-dev gettext libmicrohttpd-dev
 
-# FFmpeg build dependencies
+# Motion build dependencies
 RUN install_packages libavformat-dev libavcodec-dev libavutil-dev libswscale-dev libavdevice-dev
 
 # Required to make .deb
