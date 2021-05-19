@@ -23,7 +23,7 @@ RUN install_packages motion
 COPY motion.conf /etc/motion/motion.conf
 
 EXPOSE 8080
-EXPOSE 8081/tcp
-EXPOSE 8081/udp
+EXPOSE 80/tcp
+EXPOSE 80/udp
 
 CMD motion -c /etc/motion/motion.conf
