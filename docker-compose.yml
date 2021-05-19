@@ -6,6 +6,7 @@ services:
     build: ./motion
     devices:
       - /dev/video0:/dev/video0
+      - /dev/vchiq:/dev/vchiq
     volumes:
       - media:/safaricam/media
     working_dir: /safaricam/media
