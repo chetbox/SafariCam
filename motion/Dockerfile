@@ -40,3 +40,7 @@ EXPOSE 80/tcp
 EXPOSE 80/udp
 
 CMD motion -c /etc/motion/motion.conf
+
+# Set timezone
+RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime \
+    && dpkg-reconfigure tzdata
