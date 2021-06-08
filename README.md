@@ -24,10 +24,9 @@ This allows safely storing an access token in a public repo as long as this pass
 
 To reauthenticate, follow these steps on your local machine:
 
-- Delete the `@gmail.com` file from `gphotos`
-- docker run -ti --rm=true -v`pwd`/gphotos/user:/root -v`pwd`/photo:/safaricam/media/Safaricam -e GPHOTOS_CLI_TOKENSTORE_KEY=YOUR_PASSWORD_HERE gphotos /bin/sh
-- Run `gphotos-uploader-cli push` and follow the instruction to reauthenticate.
-- `Ctrl`+`D` to quit the Docker shell
+- Delete the `@gmail.com` file from `gphotos/user/.gphotos-uploader-cli`
+- Build a local `gphotos` docker image with `docker build gphotos -t gphotos`
+- Run `docker run -ti --rm=true -v"$(pwd)"/gphotos/user:/root -v"$(pwd)"/gphotos/photos:/safaricam/media/Safaricam -e GPHOTOS_CLI_TOKENSTORE_KEY=YOUR_PASSWORD_HERE gphotos gphotos-uploader-cli push` and follow the instructions to reauthenticate. You should use the password you set above instead of `YOUR_PASSWORD_HERE`.
 - Commit the updated file. You can remove the other new files created.
 - Update balena cloud with `balena push SafariCam`
 
