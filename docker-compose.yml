@@ -22,3 +22,7 @@ services:
     environment:
       - GPHOTOS_CLI_TOKENSTORE_KEY
     restart: unless-stopped
+  nightvision:
+    build: ./nightvision
+    devices:
+      - /dev/gpiomem:/dev/gpiomem

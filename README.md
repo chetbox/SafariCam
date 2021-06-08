@@ -33,6 +33,12 @@ To reauthenticate, follow these steps on your local machine:
 
 ## Night Vision
 
-Set `BALENA_HOST_CONFIG_disable_camera_led` to `1` in "Device Configuration" on Balena Cloud.
+### Automatic
+
+Connect Raspberry Pi GPIO pin 7 (GPIO 4) to the infra-red control pin on the IR-CUT camera to set "night vision" mode automatically. (Assumes `Europe/London` timezone)
+
+### Fixed
+
+Alternatively, to set the infra-red lights to a constant value set `BALENA_HOST_CONFIG_disable_camera_led` to `1` in "Device Configuration" on Balena Cloud to enable "night vision" mode.
 
 This will set `disable_camera_led=1` in `/boot/config.txt`.
