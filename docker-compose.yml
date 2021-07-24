@@ -26,3 +26,11 @@ services:
     build: ./nightvision
     devices:
       - /dev/gpiomem:/dev/gpiomem
+  disable-led:
+    image: busybox
+    devices:
+      - /sys/class/leds/led0:/sys/class/leds/led0
+    restart: no
+    command: |
+      echo none > /sys/class/leds/led0/trigger
+      echo 1 > /sys/class/leds/led0/brightness
