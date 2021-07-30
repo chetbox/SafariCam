@@ -1,4 +1,4 @@
-FROM balenalib/raspberry-pi:latest-build
+FROM balenalib/raspberry-pi:latest-build-20210705
 
 RUN install_packages libraspberrypi-bin libraspberrypi-dev checkinstall pkgconf autoconf automake autopoint pkgconf libtool libjpeg9-dev build-essential libzip-dev gettext libmicrohttpd-dev
 
