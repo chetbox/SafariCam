@@ -28,13 +28,21 @@ def main(ir_led_pin=7):
   GPIO.setmode(GPIO.BOARD)
   GPIO.setup(ir_led_pin, GPIO.OUT)
 
+  was_daytime = None
+
   while True:
     if is_daytime(now()):
-      print('Turning LED off')
-      GPIO.output(ir_led_pin, True)
+      if was_daytime == False:
+        # It's now day time
+        print('Turning LED off')
+        GPIO.output(ir_led_pin, True)
+      was_daytime = True
     else:
-      print('Turning LED on')
-      GPIO.output(ir_led_pin, False)
+      if was_daytime == True:
+        # It's now night time
+        print('Turning LED on')
+        GPIO.output(ir_led_pin, False)
+      was_daytime = False
     pause.minutes(30)
 
 if __name__ == "__main__":
