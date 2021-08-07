@@ -11,7 +11,7 @@
       SourceFolder: /safaricam/media
       CreateAlbums: folderName
       DeleteAfterUpload: true
-      IncludePatterns: []
+      IncludePatterns: ["**/*.mkv"]
   	  ExcludePatterns: []
     }
   ]
