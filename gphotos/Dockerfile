@@ -5,6 +5,7 @@ RUN tar xzf gphotos-upload-cli.tar.gz
 RUN cd gphotos-uploader-cli-3.1.0 && make build
 
 FROM alpine:3.14
+RUN apk add --no-cache inotify-tools
 COPY --from=build /go/gphotos-uploader-cli-3.1.0/gphotos-uploader-cli /bin/gphotos-uploader-cli
 COPY user/.gphotos-uploader-cli /root/.gphotos-uploader-cli
 CMD ["/bin/sh", "-c", \
