@@ -1,4 +1,4 @@
-FROM balenalib/raspberry-pi:latest-20210705est
+FROM balenalib/raspberry-pi:latest-20210705
 
 RUN install_packages python3 python3-pip
 
