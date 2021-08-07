@@ -1,21 +1,18 @@
 
 {
-  SecretsBackendType: file,
+  SecretsBackendType: file
   APIAppCredentials: {
-    ClientID:     "178734903006-so148t09g82ora2bepkg1innjpvsr1nm.apps.googleusercontent.com",
-    ClientSecret: "wvqFmcIn8hflZ2HRCJvAHHUr",
+    ClientID:     178734903006-so148t09g82ora2bepkg1innjpvsr1nm.apps.googleusercontent.com
+    ClientSecret: wvqFmcIn8hflZ2HRCJvAHHUr
   }
-  jobs: [
+  Account: safaricam49@gmail.com
+  Jobs: [
     {
-      account: safaricam49@gmail.com
-      sourceFolder: /safaricam/media
-      makeAlbums: {
-        enabled: true
-        use: folderName
-      }
-      deleteAfterUpload: true
-      includePatterns: []
-  	  excludePatterns: []
+      SourceFolder: /safaricam/media
+      CreateAlbums: folderName
+      DeleteAfterUpload: true
+      IncludePatterns: []
+  	  ExcludePatterns: []
     }
   ]
 }
