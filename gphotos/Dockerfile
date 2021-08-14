@@ -10,6 +10,7 @@ COPY --from=build /go/gphotos-uploader-cli-3.1.0/gphotos-uploader-cli /bin/gphot
 COPY user/.gphotos-uploader-cli /root/.gphotos-uploader-cli
 CMD ["/bin/sh", "-c", \
   "while true ; do \
+    rm -rf /root/.gphotos-uploader-cli/*.db ; \
     /bin/gphotos-uploader-cli push ; \
     inotifywait -e close_write -e move /safaricam/media/Safaricam ; \
   done"]
